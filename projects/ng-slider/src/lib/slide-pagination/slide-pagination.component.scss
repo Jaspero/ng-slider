@@ -1,0 +1,15 @@
+.dot {
+  width: 8px;
+  height: 8px;
+  margin: 2px;
+  display: inline-block;
+  border-radius: 100%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+}
+
+.active {
+  background: red;
+  opacity: 1;
+}

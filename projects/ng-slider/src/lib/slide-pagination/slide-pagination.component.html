@@ -1,0 +1,8 @@
+<div>
+  <span
+    class="dot"
+    *ngFor="let num of pagDots;"
+    [class.active]="active === num"
+    (click)="pagMove(num)">
+  </span>
+</div>

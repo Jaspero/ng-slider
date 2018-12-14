@@ -5,8 +5,8 @@ job_defaults: &job_defaults
     - image: circleci/node:latest
   working_directory: ~/project/repo
 
-cache_key: &cache_key testing-library-deps-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
-dist_key: &dist_key testing-library-dist-{{ .Revision }}
+cache_key: &cache_key ng-slider-deps-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+dist_key: &dist_key ng-slider-dist-{{ .Revision }}
 
 jobs:
   install:
@@ -83,7 +83,7 @@ jobs:
 
 workflows:
   version: 2
-  build-test-release:
+  build-release:
     jobs:
       - install
       - lint:

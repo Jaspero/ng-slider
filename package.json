@@ -64,6 +64,6 @@
     "url": "https://github.com/Jaspero/ng-slider.git"
   },
   "release": {
-    "pkgRoot": "dist/ng-slider"
+    "pkgRoot": "dist/@jaspero/ng-slider"
   }
 }

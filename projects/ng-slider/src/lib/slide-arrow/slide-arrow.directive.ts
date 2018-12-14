@@ -3,14 +3,14 @@ import {SlideArrowDirection} from '../enums/slide-arrow-direction.enum';
 import {SliderComponent} from '../slider/slider.component';
 
 @Directive({
-  selector: '[jp-slide-arrow]'
+  selector: '[jpSlideArrow]'
 })
 export class SlideArrowDirective {
   constructor(
     private slider: SliderComponent
   ) {}
 
-  @Input('jp-slide-arrow')
+  @Input('jpSlideArrow')
   direction: SlideArrowDirection = SlideArrowDirection.Right;
 
   @HostListener('click')

@@ -1,8 +1,8 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {JpSliderModule} from 'ng-slider';
 import {AppComponent} from './app.component';
+import {SharedModule} from './shared.module';
 import 'hammerjs';
 
 @NgModule({
@@ -12,9 +12,7 @@ import 'hammerjs';
   imports: [
     BrowserModule,
     HttpClientModule,
-    JpSliderModule.defaultOptions({
-      blocksPerView: 1
-    })
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -31,6 +31,12 @@ const COMPONENTS = [
   imports: [
     CommonModule
   ],
+  providers: [
+    {
+      provide: 'options',
+      useValue: DEFAULT_OPTIONS
+    }
+  ],
   exports: COMPONENTS
 })
 export class JpSliderModule {

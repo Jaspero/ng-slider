@@ -35,7 +35,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   @ViewChild('wrapperInner')
   wrapperInnerEl: ElementRef<HTMLDivElement>;
 
-  blocksPerView = 4;
+  blocksPerView = 1;
 
   left = 0;
   blockWidth: number;
@@ -59,7 +59,6 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
     this.slider.finalOptions$
       .subscribe(options => {
-
         this.blocksPerView = options.blocksPerView;
 
         if (options.slideTime) {

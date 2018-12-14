@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     const toSet = this.sliderOptions.blocksPerView + size;
 
     this.sliderOptions = {
-      blocksPerView: toSet < 1 && size === -1 ? 1 : toSet >= this.slides.length ? this.slides.length : toSet,
+      blocksPerView: toSet,
       slideTime: this.sliderOptions.slideTime
     };
   }

@@ -1,7 +1,7 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {SliderModule} from 'ng-slider/slider.module';
+import {JpSliderModule} from 'ng-slider';
 import {AppComponent} from './app.component';
 import 'hammerjs';
 
@@ -12,7 +12,7 @@ import 'hammerjs';
   imports: [
     BrowserModule,
     HttpClientModule,
-    SliderModule.defaultOptions({
+    JpSliderModule.defaultOptions({
       blocksPerView: 1
     })
   ],

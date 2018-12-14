@@ -19,10 +19,10 @@
     ],
     "paths": {
       "ng-slider": [
-        "dist/ng-slider"
+        "dist/@jaspero/ng-slider"
       ],
       "ng-slider/*": [
-        "dist/ng-slider/*"
+        "dist/@jaspero/ng-slider/*"
       ]
     }
   }

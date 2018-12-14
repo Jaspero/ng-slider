@@ -1,5 +1,5 @@
-<div class="slider-wrapper" #wrapper (panstart)="onPanStart($event)" (panmove)="onPanMove($event)" (panend)="onPanEnd($event)">
-  <div class="slider-wrapper-inner" [style.width.%]="contentWidth" [style.transform]="transform" #wrapperInner [class.active]="active">
+<div class="jp-s-w" #wrapper (panstart)="onPanStart($event)" (panmove)="onPanMove($event)" (panend)="onPanEnd($event)">
+  <div class="jp-s-w-i" [style.width.%]="contentWidth" [style.transform]="transform" #wrapperInner [class.active]="active">
     <div *ngFor="let slide of slides" [style.width.%]="blockWidth">
       <ng-template [ngTemplateOutlet]="slide.content"></ng-template>
     </div>

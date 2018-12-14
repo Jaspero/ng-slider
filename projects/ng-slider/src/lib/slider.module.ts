@@ -33,10 +33,10 @@ const COMPONENTS = [
   ],
   exports: COMPONENTS
 })
-export class SliderModule {
+export class JpSliderModule {
   static defaultOptions(options: Partial<SliderOptions> = {}): ModuleWithProviders {
     return {
-      ngModule: SliderModule,
+      ngModule: JpSliderModule,
       providers: [
         {
           provide: OPTIONS,

@@ -1,9 +1,5 @@
 {
   "name": "@jaspero/ng-slider",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jaspero/ng-slider"
-  },
   "author": {
     "name": "Jaspero Ltd",
     "email": "info@jaspero.co"
@@ -13,7 +9,7 @@
     "Slider",
     "Range slider"
   ],
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jaspero/ng-slider/issues"
@@ -22,5 +18,9 @@
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jaspero/ng-slider.git"
   }
 }

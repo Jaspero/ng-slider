@@ -113,6 +113,11 @@ export class SlidesComponent implements OnInit, AfterViewInit {
         slides: this.slides,
         slideWidthPercentage: this.slideWidthPercentage
       });
+
+      this.change.next({
+        index: num,
+        slide: this.slides.toArray()[num]
+      });
     });
   }
 

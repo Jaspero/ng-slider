@@ -1,0 +1,14 @@
+<jp-slider>
+  <jp-slides>
+    <jp-slide *ngFor="let member of members">
+      <div class="member">
+        <img draggable="false" width="100" [src]="member.profileImage">
+        <h6>{{member.fullName}}</h6>
+        <p>{{member.shortBio}}</p>
+      </div>
+    </jp-slide>
+  </jp-slides>
+  <jp-slide-pagination></jp-slide-pagination>
+  <button jpSlideArrow="left">Left</button>
+  <button jpSlideArrow="right">Right</button>
+</jp-slider>

@@ -111,14 +111,22 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+
+    if (this.slides && this.slides.first) {
+      this._setProps();
+    }
+
     this.slides.changes
       .subscribe(() => {
-        this._setProps();
+        if (this.slides.first) {
+          this._setProps();
+        }
       });
   }
 
   move(right = true) {
     this.active = true;
+
     setTimeout(() => {
       this.active = false;
     }, 1000);
@@ -176,6 +184,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   onPanEnd(event) {
     this.active = true;
+
     setTimeout(() => {
       this.active = false;
     }, 1000);

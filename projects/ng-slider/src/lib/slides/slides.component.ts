@@ -5,12 +5,15 @@ import {
   Component,
   ContentChildren,
   ElementRef,
+  EventEmitter,
   OnInit,
+  Output,
   QueryList,
   ViewChild
 } from '@angular/core';
 import {BehaviorSubject, fromEvent, interval, merge, Subscription} from 'rxjs';
 import {switchMap, takeUntil} from 'rxjs/operators';
+import {SlideChange} from '../interfaces/slide-change.interface';
 import {SlideComponent} from '../slide/slide.component';
 import {SliderComponent} from '../slider/slider.component';
 
@@ -34,6 +37,9 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   @ViewChild('wrapperInner')
   wrapperInnerEl: ElementRef<HTMLDivElement>;
+
+  @Output()
+  change = new EventEmitter<SlideChange>();
 
   blocksPerView = 1;
 
@@ -156,6 +162,8 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       slides: this.slides,
       slideWidthPercentage: this.slideWidthPercentage
     });
+
+    this._emitSlideChange();
   }
 
   onPanStart(event) {
@@ -213,6 +221,8 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       slides: this.slides,
       slideWidthPercentage: this.slideWidthPercentage
     });
+
+    this._emitSlideChange();
   }
 
   private _setProps() {
@@ -238,5 +248,15 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     if (this.timerReset$) {
       this.timerReset$.next(true);
     }
+  }
+
+  private _emitSlideChange() {
+    const leftAbs = Math.abs(this.left);
+    const currentIndex = leftAbs ? (this.blockWidth / leftAbs) - 1 : 0;
+
+    this.change.next({
+      index: currentIndex,
+      slide: this.slides.toArray()[currentIndex]
+    });
   }
 }

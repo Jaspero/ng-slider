@@ -7,8 +7,6 @@ import {ChangeDetectionStrategy, Component, TemplateRef, ViewChild} from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SlideComponent {
-  constructor() {}
-
   @ViewChild(TemplateRef)
   content: TemplateRef<any>;
 }

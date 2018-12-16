@@ -8,7 +8,7 @@
     "postbuild": "cp ./README.md ./dist/@jaspero/ng-slider && cp LICENSE ./dist/@jaspero/ng-slider",
     "test": "ls",
     "test:app": "ls",
-    "lint": "ng lint",
+    "lint": "ng lint ng-slider",
     "semantic-release": "semantic-release"
   },
   "lint-staged": {

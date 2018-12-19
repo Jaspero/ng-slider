@@ -123,7 +123,6 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
     if (this.slides && this.slides.first) {
       this._setProps();
     }
@@ -232,7 +231,6 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   private _setProps() {
-    this.left = 0;
     this.blockWidth = 100 / this.blocksPerView;
     this.contentWidth = this.blockWidth * this.slides.length;
 
@@ -240,6 +238,14 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
     this.slideWidthPercentage = (<HTMLElement>this.wrapperInnerEl.nativeElement.children[0]).offsetWidth /
       this.wrapperInnerEl.nativeElement.offsetWidth * 100;
+
+    const initialSlide = this.slider.finalOptions$.getValue().initialSlide;
+    if (initialSlide) {
+      this.left = -this.slideWidthPercentage * initialSlide;
+      this.cdr.detectChanges();
+    } else {
+      this.left = 0;
+    }
 
     this.slider.change$.next({
       left: this.left,

@@ -20,9 +20,9 @@ export class SimpleExampleComponent implements OnInit {
   @ViewChildren(SlideComponent) slides !: QueryList<SlideComponent>;
 
   sliderOptions: Partial<SliderOptions> = {
-    blocksPerView: 2,
+    blocksPerView: 1,
     slideTime: 5000,
-    movesPerClick: 2
+    movesPerClick: 1
   };
 
   ngOnInit() {
@@ -46,4 +46,6 @@ export class SimpleExampleComponent implements OnInit {
       slideTime: this.sliderOptions.slideTime
     };
   }
+
+  slideInView(index) {}
 }

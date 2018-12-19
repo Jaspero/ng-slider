@@ -21,7 +21,7 @@ export class SliderComponent {
   change$ = new Subject<{
     slideWidthPercentage: number,
     left: number,
-    blockPerView: number,
+    blocksPerView: number,
     slides: QueryList<SlideComponent>,
     blockWidth: number
   }>();

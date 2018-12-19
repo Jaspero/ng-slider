@@ -1,5 +1,5 @@
 <jp-slider [options]="sliderOptions">
-  <jp-slides>
+  <jp-slides (slideInView)="slideInView($event)">
     <jp-slide *ngFor="let member of members">
       <div class="member">
         <img draggable="false" width="100" [src]="member.profileImage">

@@ -15,7 +15,7 @@ export class SlidePaginationComponent implements OnInit {
 
   active: number;
   pagDots = [];
-  blockPerView: number;
+  blocksPerView: number;
 
   ngOnInit() {
 
@@ -25,17 +25,17 @@ export class SlidePaginationComponent implements OnInit {
       /**
        * Only rebuild view count if necessary
        */
-      if (data.blockPerView !== this.blockPerView) {
+      if (data.blocksPerView !== this.blocksPerView) {
         this.pagDots = [];
 
-        const views = data.slides.length - data.blockPerView + 1;
+        const views = data.slides.length - data.blocksPerView + 1;
 
         for (let i = 0; i < views; i++) {
           this.pagDots.push(i);
         }
       }
 
-      this.blockPerView = data.blockPerView;
+      this.blocksPerView = data.blocksPerView;
 
       this.active = Math.abs(+(data.left / data.slideWidthPercentage).toFixed(0));
       this._cdr.detectChanges();

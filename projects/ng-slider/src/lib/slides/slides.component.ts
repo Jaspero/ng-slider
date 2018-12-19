@@ -41,6 +41,9 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   @Output()
   change = new EventEmitter<SlideChange>();
 
+  @Output()
+  slideInView = new EventEmitter<number>();
+
   blocksPerView = 1;
   movesPerClick = 1;
 
@@ -109,7 +112,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
       this.slider.change$.next({
         left: this.left,
-        blockPerView: this.blocksPerView,
+        blocksPerView: this.blocksPerView,
         blockWidth: this.blockWidth,
         slides: this.slides,
         slideWidthPercentage: this.slideWidthPercentage
@@ -158,11 +161,13 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       this.left = max;
     }
 
+    this._shouldEmitSlideInView(amount);
+
     this.cdr.detectChanges();
 
     this.slider.change$.next({
       left: this.left,
-      blockPerView: this.blocksPerView,
+      blocksPerView: this.blocksPerView,
       blockWidth: this.blockWidth,
       slides: this.slides,
       slideWidthPercentage: this.slideWidthPercentage
@@ -186,7 +191,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
     this.slider.change$.next({
       left: this.left,
-      blockPerView: this.blocksPerView,
+      blocksPerView: this.blocksPerView,
       blockWidth: this.blockWidth,
       slides: this.slides,
       slideWidthPercentage: this.slideWidthPercentage
@@ -219,9 +224,11 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
     this.cdr.detectChanges();
 
+    this._shouldEmitSlideInView(this.blocksPerView);
+
     this.slider.change$.next({
       left: this.left,
-      blockPerView: this.blocksPerView,
+      blocksPerView: this.blocksPerView,
       blockWidth: this.blockWidth,
       slides: this.slides,
       slideWidthPercentage: this.slideWidthPercentage
@@ -247,9 +254,17 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       this.left = 0;
     }
 
+    const slides: SlideComponent[] = this.slides.toArray();
+    for (let i = 0; i < (this.blocksPerView); i++) {
+      if (!slides[initialSlide + i].viewed) {
+        slides[initialSlide + i].viewed = true;
+        this.slideInView.emit(initialSlide + i);
+      }
+    }
+
     this.slider.change$.next({
       left: this.left,
-      blockPerView: this.blocksPerView,
+      blocksPerView: this.blocksPerView,
       blockWidth: this.blockWidth,
       slides: this.slides,
       slideWidthPercentage: this.slideWidthPercentage
@@ -264,11 +279,22 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   private _emitSlideChange() {
     const leftAbs = Math.abs(this.left);
-    const currentIndex = leftAbs ? (this.blockWidth / leftAbs) - 1 : 0;
+    const index = leftAbs ? (this.blockWidth / leftAbs) - 1 : 0;
 
     this.change.next({
-      index: currentIndex,
-      slide: this.slides.toArray()[currentIndex]
+      slide: this.slides.toArray()[index],
+      index
     });
+  }
+
+  private _shouldEmitSlideInView(conditionValue) {
+    const currentIndex = Math.abs(this.left / this.slideWidthPercentage);
+    for (let i = 0; i < conditionValue; i++) {
+      const slides: SlideComponent[] = this.slides.toArray();
+      if (!slides[currentIndex + i].viewed) {
+        slides[currentIndex + i].viewed = true;
+        this.slideInView.emit(currentIndex + i);
+      }
+    }
   }
 }

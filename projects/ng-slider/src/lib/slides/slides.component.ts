@@ -42,17 +42,17 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   change = new EventEmitter<SlideChange>();
 
   blocksPerView = 1;
+  movesPerClick = 1;
 
   left = 0;
   blockWidth: number;
   contentWidth: number;
   slideWidthPercentage: number;
 
-  timerReset$: BehaviorSubject<boolean>;
   lastPosition = 0;
   startPanX = 0;
-
   active = false;
+  timerReset$: BehaviorSubject<boolean>;
 
   private _slideTimeInterval: Subscription;
 
@@ -66,6 +66,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     this.slider.finalOptions$
       .subscribe(options => {
         this.blocksPerView = options.blocksPerView;
+        this.movesPerClick = options.movesPerClick;
 
         if (options.slideTime) {
 
@@ -96,7 +97,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       });
 
     this.slider.move$.subscribe(direction => {
-      this.move(direction === 'right');
+      this.move(direction === 'right', this.movesPerClick);
     });
 
     this.slider.jumpToPage$.subscribe(num => {
@@ -135,7 +136,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  move(right = true) {
+  move(right = true, amount = 1) {
     this.active = true;
 
     setTimeout(() => {
@@ -147,9 +148,9 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     const max = -this.slideWidthPercentage * (this.slides.length - this.blocksPerView);
 
     if (right) {
-      this.left -= this.slideWidthPercentage;
+      this.left -= this.slideWidthPercentage * amount;
     } else {
-      this.left += this.slideWidthPercentage;
+      this.left += this.slideWidthPercentage * amount;
     }
 
     if (this.left < max) {

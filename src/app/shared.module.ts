@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {JpSliderModule} from '@jaspero/ng-slider';
+import {JpSliderModule} from 'ng-slider';
 
 @NgModule({
   imports: [

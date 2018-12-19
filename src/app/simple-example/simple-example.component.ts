@@ -21,7 +21,8 @@ export class SimpleExampleComponent implements OnInit {
 
   sliderOptions: Partial<SliderOptions> = {
     blocksPerView: 2,
-    slideTime: 5000
+    slideTime: 5000,
+    movesPerClick: 2
   };
 
   ngOnInit() {

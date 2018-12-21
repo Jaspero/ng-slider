@@ -131,6 +131,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this._manager) {
       this._manager.destroy();
     }
+
+    if (this._slideTimeInterval) {
+      this._slideTimeInterval.unsubscribe();
+    }
   }
 
   ngAfterViewInit() {

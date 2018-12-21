@@ -6,6 +6,7 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
+  OnDestroy,
   OnInit,
   Output,
   QueryList,
@@ -23,7 +24,7 @@ import {SliderComponent} from '../slider/slider.component';
   styleUrls: ['./slides.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SlidesComponent implements OnInit, AfterViewInit {
+export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private slider: SliderComponent,
     private cdr: ChangeDetectorRef
@@ -57,6 +58,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   active = true;
   timerReset$: BehaviorSubject<boolean>;
 
+  private _manager: any;
   private _slideTimeInterval: Subscription;
 
   get transform() {
@@ -123,6 +125,12 @@ export class SlidesComponent implements OnInit, AfterViewInit {
         slide: this.slides.toArray()[num]
       });
     });
+  }
+
+  ngOnDestroy() {
+    if (this._manager) {
+      this._manager.destroy();
+    }
   }
 
   ngAfterViewInit() {
@@ -304,6 +312,8 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
         this._emitSlideChange();
       });
+
+      this._manager = mc;
     }
   }
 }

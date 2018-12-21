@@ -16,7 +16,6 @@
   height: 100%;
   display: flex;
   transition: 0s;
-  transform: translate3d(0%, 0px, 0px);
   &.active {
     transition: .3s;
   }

@@ -136,6 +136,8 @@ export class SlidesComponent implements OnInit, AfterViewInit {
           this._setProps();
         }
       });
+
+    this._hammer();
   }
 
   move(right = true, amount = 1) {
@@ -143,7 +145,8 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       this.active = false;
-    }, 1000);
+      this.cdr.detectChanges();
+    }, 300);
 
     this._resetTimer();
 
@@ -164,67 +167,6 @@ export class SlidesComponent implements OnInit, AfterViewInit {
     this._shouldEmitSlideInView(amount);
 
     this.cdr.detectChanges();
-
-    this.slider.change$.next({
-      left: this.left,
-      blocksPerView: this.blocksPerView,
-      blockWidth: this.blockWidth,
-      slides: this.slides,
-      slideWidthPercentage: this.slideWidthPercentage
-    });
-
-    this._emitSlideChange();
-  }
-
-  onPanStart(event) {
-    this.lastPosition = event.center.x;
-    this.startPanX = event.center.x;
-  }
-
-  onPanMove(event) {
-    const movedDifferencePx = event.center.x - this.lastPosition;
-    const movedDifferencePercentage = movedDifferencePx / this.wrapperInnerEl.nativeElement.offsetWidth * 100;
-
-    this.left = this.left + movedDifferencePercentage;
-
-    this.cdr.detectChanges();
-
-    this.slider.change$.next({
-      left: this.left,
-      blocksPerView: this.blocksPerView,
-      blockWidth: this.blockWidth,
-      slides: this.slides,
-      slideWidthPercentage: this.slideWidthPercentage
-    });
-
-    this.lastPosition = event.center.x;
-  }
-
-  onPanEnd(event) {
-    this.active = true;
-
-    setTimeout(() => {
-      this.active = false;
-    }, 1000);
-
-    const shouldLockRight = (this.startPanX - event.center.x) > 0 ? 1 : 0;
-    const pageNumSplitByDot = (this.left / this.slideWidthPercentage).toFixed(2).split('.');
-
-    this.left = (+pageNumSplitByDot[0] - shouldLockRight) * this.slideWidthPercentage;
-
-    this._resetTimer();
-
-    const max = -this.slideWidthPercentage * (this.slides.length - this.blocksPerView);
-
-    if (this.left < max) {
-      this.left = 0;
-    } else if (this.left > 1) {
-      this.left = max;
-    }
-
-    this.cdr.detectChanges();
-
-    this._shouldEmitSlideInView(this.blocksPerView);
 
     this.slider.change$.next({
       left: this.left,
@@ -295,6 +237,80 @@ export class SlidesComponent implements OnInit, AfterViewInit {
         slides[currentIndex + i].viewed = true;
         this.slideInView.emit(currentIndex + i);
       }
+    }
+  }
+
+  private _hammer() {
+    const hammer: any = typeof window !== 'undefined' ? (window as any).Hammer : null;
+
+    if (hammer) {
+      const mc = new hammer(this.wrapperEl.nativeElement);
+      const pan = new hammer.Pan({
+        direction: hammer.DIRECTION_HORIZONTAL
+      });
+      mc.add(pan);
+
+      mc.on('panstart', event => {
+        this.lastPosition = event.center.x;
+        this.startPanX = event.center.x;
+      });
+
+      mc.on('panmove', event => {
+        const movedDifferencePx = event.center.x - this.lastPosition;
+        const movedDifferencePercentage = movedDifferencePx / this.wrapperInnerEl.nativeElement.offsetWidth * 100;
+
+        this.left = this.left + movedDifferencePercentage;
+
+        this.cdr.detectChanges();
+
+        this.slider.change$.next({
+          left: this.left,
+          blocksPerView: this.blocksPerView,
+          blockWidth: this.blockWidth,
+          slides: this.slides,
+          slideWidthPercentage: this.slideWidthPercentage
+        });
+
+        this.lastPosition = event.center.x;
+      });
+
+      mc.on('panend', event => {
+        this.active = true;
+
+        setTimeout(() => {
+          this.active = false;
+          this.cdr.detectChanges();
+        }, 300);
+
+        const shouldLockRight = (this.startPanX - event.center.x) > 0 ? 1 : 0;
+        const pageNumSplitByDot = (this.left / this.slideWidthPercentage).toFixed(2).split('.');
+
+        this.left = (+pageNumSplitByDot[0] - shouldLockRight) * this.slideWidthPercentage;
+
+        this._resetTimer();
+
+        const max = -this.slideWidthPercentage * (this.slides.length - this.blocksPerView);
+
+        if (this.left < max) {
+          this.left = 0;
+        } else if (this.left > 1) {
+          this.left = max;
+        }
+
+        this.cdr.detectChanges();
+
+        this._shouldEmitSlideInView(this.blocksPerView);
+
+        this.slider.change$.next({
+          left: this.left,
+          blocksPerView: this.blocksPerView,
+          blockWidth: this.blockWidth,
+          slides: this.slides,
+          slideWidthPercentage: this.slideWidthPercentage
+        });
+
+        this._emitSlideChange();
+      });
     }
   }
 }

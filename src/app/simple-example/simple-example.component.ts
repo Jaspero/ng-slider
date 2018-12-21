@@ -48,4 +48,8 @@ export class SimpleExampleComponent implements OnInit {
   }
 
   slideInView(index) {}
+
+  gotClicked() {
+    console.log('blaa');
+  }
 }

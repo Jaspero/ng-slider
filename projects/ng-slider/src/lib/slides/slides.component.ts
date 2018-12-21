@@ -54,7 +54,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
 
   lastPosition = 0;
   startPanX = 0;
-  active = false;
+  active = true;
   timerReset$: BehaviorSubject<boolean>;
 
   private _slideTimeInterval: Subscription;
@@ -141,13 +141,6 @@ export class SlidesComponent implements OnInit, AfterViewInit {
   }
 
   move(right = true, amount = 1) {
-    this.active = true;
-
-    setTimeout(() => {
-      this.active = false;
-      this.cdr.detectChanges();
-    }, 300);
-
     this._resetTimer();
 
     const max = -this.slideWidthPercentage * (this.slides.length - this.blocksPerView);
@@ -253,6 +246,9 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       mc.on('panstart', event => {
         this.lastPosition = event.center.x;
         this.startPanX = event.center.x;
+
+        this.active = false;
+        this.cdr.detectChanges();
       });
 
       mc.on('panmove', event => {
@@ -277,10 +273,7 @@ export class SlidesComponent implements OnInit, AfterViewInit {
       mc.on('panend', event => {
         this.active = true;
 
-        setTimeout(() => {
-          this.active = false;
-          this.cdr.detectChanges();
-        }, 300);
+        this.cdr.detectChanges();
 
         const shouldLockRight = (this.startPanX - event.center.x) > 0 ? 1 : 0;
         const pageNumSplitByDot = (this.left / this.slideWidthPercentage).toFixed(2).split('.');

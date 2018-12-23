@@ -52,6 +52,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   contentWidth: number;
   slideWidthPercentage: number;
   maxLeft: number;
+  positions: number[];
   left = 0;
 
   lastPosition = 0;
@@ -173,7 +174,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.maxLeft = -this.slideWidthPercentage * (this.slides.length - this.options.blocksPerView);
 
-    const initialSlide = this.slider.finalOptions$.getValue().initialSlide;
+    const initialSlide = this.options.initialSlide;
     const slides = this.slides.toArray();
 
     if (initialSlide) {

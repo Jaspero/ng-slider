@@ -48,14 +48,16 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   options: SliderOptions;
 
-  left = 0;
   blockWidth: number;
   contentWidth: number;
   slideWidthPercentage: number;
+  maxLeft: number;
+  left = 0;
 
   lastPosition = 0;
   startPanX = 0;
   active = true;
+
   timerReset$: BehaviorSubject<boolean>;
 
   private _manager: any;
@@ -72,7 +74,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(options => {
         this.options = options;
 
-        this._loop();
+        this._autoSlide();
 
         if (this.slides) {
           this._setProps();
@@ -133,18 +135,16 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   move(right = true, amount = 1) {
     this._resetTimer();
 
-    const max = -this.slideWidthPercentage * (this.slides.length - this.options.blocksPerView);
-
     if (right) {
       this.left -= this.slideWidthPercentage * amount;
     } else {
       this.left += this.slideWidthPercentage * amount;
     }
 
-    if (this.left < max) {
+    if (this.left < this.maxLeft) {
       this.left = 0;
-    } else if (this.left > 1) {
-      this.left = max;
+    } else if (this.left > 0) {
+      this.left = this.maxLeft;
     }
 
     this._shouldEmitSlideInView(amount);
@@ -171,8 +171,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.slideWidthPercentage = (<HTMLElement>this.wrapperInnerEl.nativeElement.children[0]).offsetWidth /
       this.wrapperInnerEl.nativeElement.offsetWidth * 100;
 
+    this.maxLeft = -this.slideWidthPercentage * (this.slides.length - this.options.blocksPerView);
+
     const initialSlide = this.slider.finalOptions$.getValue().initialSlide;
-    const slides: SlideComponent[] = this.slides.toArray();
+    const slides = this.slides.toArray();
 
     if (initialSlide) {
       this.left = -this.slideWidthPercentage * initialSlide;
@@ -215,8 +217,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _shouldEmitSlideInView(conditionValue) {
     const currentIndex = Math.abs(this.left / this.slideWidthPercentage);
+
     for (let i = 0; i < conditionValue; i++) {
-      const slides: SlideComponent[] = this.slides.toArray();
+
+      const slides = this.slides.toArray();
+
       if (!slides[currentIndex + i].viewed) {
         slides[currentIndex + i].viewed = true;
         this.slideInView.emit(currentIndex + i);
@@ -300,7 +305,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private _loop() {
+  private _autoSlide() {
     if (this.options.slideTime) {
 
       if (this._slideTimeInterval) {

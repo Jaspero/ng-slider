@@ -3,4 +3,5 @@ export interface SliderOptions {
   slideTime: number;
   movesPerClick: number;
   initialSlide: number;
+  loop: boolean;
 }

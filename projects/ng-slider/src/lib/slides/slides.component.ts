@@ -52,12 +52,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   contentWidth: number;
   slideWidthPercentage: number;
   maxLeft: number;
-  positions: number[];
   left = 0;
 
   lastPosition = 0;
   startPanX = 0;
-  active = true;
+  inPan = false;
 
   timerReset$: BehaviorSubject<boolean>;
 
@@ -163,6 +162,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     this._emitSlideChange();
   }
 
+  stopPropagation(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
   private _setProps() {
     this.blockWidth = 100 / this.options.blocksPerView;
     this.contentWidth = this.blockWidth * this.slides.length;
@@ -244,7 +248,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.lastPosition = event.center.x;
         this.startPanX = event.center.x;
 
-        this.active = false;
+        this.inPan = true;
         this.cdr.detectChanges();
       });
 
@@ -268,7 +272,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       mc.on('panend', event => {
-        this.active = true;
+        this.inPan = false;
 
         this.cdr.detectChanges();
 

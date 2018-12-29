@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/Jaspero/ng-slider/compare/v1.4.6...v1.4.7) (2018-12-29)
+
+
+### Bug Fixes
+
+* Removed dist release from semantic ([36b8b37](https://github.com/Jaspero/ng-slider/commit/36b8b37))
+
 ## [1.4.6](https://github.com/Jaspero/ng-slider/compare/v1.4.5...v1.4.6) (2018-12-29)
 
 

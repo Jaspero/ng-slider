@@ -223,7 +223,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
       const slides = this.slides.toArray();
 
-      if (!slides[currentIndex + i].viewed) {
+      if (slides[currentIndex + i] && !slides[currentIndex + i].viewed) {
         slides[currentIndex + i].viewed = true;
         this.slideInView.emit(currentIndex + i);
       }
@@ -279,12 +279,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._resetTimer();
 
-        const max = -this.slideWidthPercentage * (this.slides.length - this.options.blocksPerView);
-
-        if (this.left < max) {
+        if (this.left < this.maxLeft) {
           this.left = 0;
         } else if (this.left > 1) {
-          this.left = max;
+          this.left = this.maxLeft;
         }
 
         this.cdr.detectChanges();

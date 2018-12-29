@@ -1,10 +1,9 @@
 <jp-slider [options]="sliderOptions">
   <jp-slides (slideInView)="slideInView($event)">
-    <jp-slide *ngFor="let member of members">
-      <div class="member" (click)="gotClicked()">
-        <img draggable="false" width="100" [src]="member.profileImage">
-        <h6>{{member.fullName}}</h6>
-        <p>{{member.shortBio}}</p>
+    <jp-slide *ngFor="let item of dataSet">
+      <div class="slide" (click)="gotClicked()">
+        <h1>{{item.title}}</h1>
+        <p>{{item.content}}</p>
       </div>
     </jp-slide>
   </jp-slides>

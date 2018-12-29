@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChildren, QueryList} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, QueryList, ViewChildren} from '@angular/core';
 import {SliderOptions} from '../../../projects/ng-slider/src/lib/interfaces/slider-options.interface';
 import {SlideComponent} from '../../../projects/ng-slider/src/lib/slide/slide.component';
+import {SET_ONE} from '../consts/set-one.const';
 
 @Component({
   selector: 'jp-simple-example',
@@ -9,13 +9,12 @@ import {SlideComponent} from '../../../projects/ng-slider/src/lib/slide/slide.co
   styleUrls: ['./simple-example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimpleExampleComponent implements OnInit {
+export class SimpleExampleComponent {
   constructor(
-    private _cdr: ChangeDetectorRef,
-    private _http: HttpClient
+    private _cdr: ChangeDetectorRef
   ) {}
 
-  members = [];
+  dataSet = SET_ONE;
 
   @ViewChildren(SlideComponent) slides !: QueryList<SlideComponent>;
 
@@ -24,18 +23,6 @@ export class SimpleExampleComponent implements OnInit {
     slideTime: 5000,
     movesPerClick: 1
   };
-
-  ngOnInit() {
-    this.getData();
-  }
-
-  getData() {
-    this._http.get('https://api.jaspero.club/api/v1/p/genos-glyco/members')
-      .subscribe((item: any) => {
-        this.members = item.data.slice(0, 5);
-        this._cdr.detectChanges();
-      });
-  }
 
   changeSize(size: number) {
     this._cdr.detectChanges();

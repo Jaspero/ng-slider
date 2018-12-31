@@ -162,11 +162,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     this._emitSlideChange();
   }
 
-  stopPropagation(event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
   private _setProps() {
     this.blockWidth = 100 / this.options.blocksPerView;
     this.contentWidth = this.blockWidth * this.slides.length;

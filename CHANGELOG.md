@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/Jaspero/ng-slider/compare/v1.4.7...v1.4.8) (2019-01-11)
+
+
+### Bug Fixes
+
+* Slides checking if initialSlide exists before moving to it :bug: ([cac684a](https://github.com/Jaspero/ng-slider/commit/cac684a))
+
 ## [1.4.7](https://github.com/Jaspero/ng-slider/compare/v1.4.6...v1.4.7) (2018-12-29)
 
 

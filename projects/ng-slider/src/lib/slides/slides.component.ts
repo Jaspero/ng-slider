@@ -184,9 +184,12 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     for (let i = 0; i < this.options.blocksPerView; i++) {
-      if (!slides[initialSlide + i].viewed) {
-        slides[initialSlide + i].viewed = true;
-        this.slideInView.emit(initialSlide + i);
+
+      const checkIndex = initialSlide + i;
+
+      if (slides[checkIndex] && !slides[checkIndex].viewed) {
+        slides[checkIndex].viewed = true;
+        this.slideInView.emit(checkIndex);
       }
     }
 
@@ -221,10 +224,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     for (let i = 0; i < conditionValue; i++) {
 
       const slides = this.slides.toArray();
+      const checkIndex = currentIndex + i;
 
-      if (slides[currentIndex + i] && !slides[currentIndex + i].viewed) {
-        slides[currentIndex + i].viewed = true;
-        this.slideInView.emit(currentIndex + i);
+      if (slides[checkIndex] && !slides[checkIndex].viewed) {
+        slides[checkIndex].viewed = true;
+        this.slideInView.emit(checkIndex);
       }
     }
   }

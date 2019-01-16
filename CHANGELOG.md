@@ -1,3 +1,10 @@
+## [1.4.9](https://github.com/Jaspero/ng-slider/compare/v1.4.8...v1.4.9) (2019-01-16)
+
+
+### Bug Fixes
+
+* Updated slideInView to emit related element ([76a149e](https://github.com/Jaspero/ng-slider/commit/76a149e))
+
 ## [1.4.8](https://github.com/Jaspero/ng-slider/compare/v1.4.7...v1.4.8) (2019-01-11)
 
 

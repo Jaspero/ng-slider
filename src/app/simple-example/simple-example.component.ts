@@ -1,4 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, QueryList, ViewChildren} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import {SliderOptions} from '../../../projects/ng-slider/src/lib/interfaces/slider-options.interface';
 import {SlideComponent} from '../../../projects/ng-slider/src/lib/slide/slide.component';
 import {SET_ONE} from '../consts/set-one.const';
@@ -10,13 +16,11 @@ import {SET_ONE} from '../consts/set-one.const';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleExampleComponent {
-  constructor(
-    private _cdr: ChangeDetectorRef
-  ) {}
+  constructor(private _cdr: ChangeDetectorRef) {}
 
   dataSet = SET_ONE;
 
-  @ViewChildren(SlideComponent) slides !: QueryList<SlideComponent>;
+  @ViewChildren(SlideComponent) slides!: QueryList<SlideComponent>;
 
   sliderOptions: Partial<SliderOptions> = {
     blocksPerView: 3,
@@ -34,7 +38,9 @@ export class SimpleExampleComponent {
     };
   }
 
-  slideInView(index) {}
+  slideInView(event) {
+    console.log('event', event);
+  }
 
   gotClicked() {
     console.log('blaa');

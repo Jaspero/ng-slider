@@ -44,7 +44,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   change = new EventEmitter<SlideChange>();
 
   @Output()
-  slideInView = new EventEmitter<number>();
+  slideInView = new EventEmitter<{index: number; slide: Element}>();
 
   options: SliderOptions;
 
@@ -70,16 +70,15 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.cdr.detach();
 
-    this.slider.finalOptions$
-      .subscribe(options => {
-        this.options = options;
+    this.slider.finalOptions$.subscribe(options => {
+      this.options = options;
 
-        this._autoSlide();
+      this._autoSlide();
 
-        if (this.slides) {
-          this._setProps();
-        }
-      });
+      if (this.slides) {
+        this._setProps();
+      }
+    });
 
     this.slider.move$.subscribe(direction => {
       this.move(direction === 'right', this.options.movesPerClick);
@@ -122,12 +121,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       this._setProps();
     }
 
-    this.slides.changes
-      .subscribe(() => {
-        if (this.slides.first) {
-          this._setProps();
-        }
-      });
+    this.slides.changes.subscribe(() => {
+      if (this.slides.first) {
+        this._setProps();
+      }
+    });
 
     this._hammer();
   }
@@ -168,10 +166,15 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.cdr.detectChanges();
 
-    this.slideWidthPercentage = (<HTMLElement>this.wrapperInnerEl.nativeElement.children[0]).offsetWidth /
-      this.wrapperInnerEl.nativeElement.offsetWidth * 100;
+    this.slideWidthPercentage =
+      ((<HTMLElement>this.wrapperInnerEl.nativeElement.children[0])
+        .offsetWidth /
+        this.wrapperInnerEl.nativeElement.offsetWidth) *
+      100;
 
-    this.maxLeft = -this.slideWidthPercentage * (this.slides.length - this.options.blocksPerView);
+    this.maxLeft =
+      -this.slideWidthPercentage *
+      (this.slides.length - this.options.blocksPerView);
 
     const initialSlide = this.options.initialSlide;
     const slides = this.slides.toArray();
@@ -184,12 +187,14 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     for (let i = 0; i < this.options.blocksPerView; i++) {
-
       const checkIndex = initialSlide + i;
 
       if (slides[checkIndex] && !slides[checkIndex].viewed) {
         slides[checkIndex].viewed = true;
-        this.slideInView.emit(checkIndex);
+        this.slideInView.emit({
+          index: checkIndex,
+          slide: this.wrapperInnerEl.nativeElement.children[checkIndex]
+        });
       }
     }
 
@@ -210,7 +215,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _emitSlideChange() {
     const leftAbs = Math.abs(this.left);
-    const index = leftAbs ? (this.blockWidth / leftAbs) - 1 : 0;
+    const index = leftAbs ? this.blockWidth / leftAbs - 1 : 0;
 
     this.change.next({
       slide: this.slides.toArray()[index],
@@ -222,19 +227,22 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     const currentIndex = Math.abs(this.left / this.slideWidthPercentage);
 
     for (let i = 0; i < conditionValue; i++) {
-
       const slides = this.slides.toArray();
       const checkIndex = currentIndex + i;
 
       if (slides[checkIndex] && !slides[checkIndex].viewed) {
         slides[checkIndex].viewed = true;
-        this.slideInView.emit(checkIndex);
+        this.slideInView.emit({
+          index: checkIndex,
+          slide: this.wrapperInnerEl.nativeElement.children[checkIndex]
+        });
       }
     }
   }
 
   private _hammer() {
-    const hammer: any = typeof window !== 'undefined' ? (window as any).Hammer : null;
+    const hammer: any =
+      typeof window !== 'undefined' ? (window as any).Hammer : null;
 
     if (hammer) {
       const mc = new hammer(this.wrapperEl.nativeElement);
@@ -253,7 +261,9 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
       mc.on('panmove', event => {
         const movedDifferencePx = event.center.x - this.lastPosition;
-        const movedDifferencePercentage = movedDifferencePx / this.wrapperInnerEl.nativeElement.offsetWidth * 100;
+        const movedDifferencePercentage =
+          (movedDifferencePx / this.wrapperInnerEl.nativeElement.offsetWidth) *
+          100;
 
         this.left = this.left + movedDifferencePercentage;
 
@@ -275,10 +285,13 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.cdr.detectChanges();
 
-        const shouldLockRight = (this.startPanX - event.center.x) > 0 ? 1 : 0;
-        const pageNumSplitByDot = (this.left / this.slideWidthPercentage).toFixed(2).split('.');
+        const shouldLockRight = this.startPanX - event.center.x > 0 ? 1 : 0;
+        const pageNumSplitByDot = (this.left / this.slideWidthPercentage)
+          .toFixed(2)
+          .split('.');
 
-        this.left = (+pageNumSplitByDot[0] - shouldLockRight) * this.slideWidthPercentage;
+        this.left =
+          (+pageNumSplitByDot[0] - shouldLockRight) * this.slideWidthPercentage;
 
         this._resetTimer();
 
@@ -309,7 +322,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _autoSlide() {
     if (this.options.slideTime) {
-
       if (this._slideTimeInterval) {
         this._slideTimeInterval.unsubscribe();
       }
@@ -321,10 +333,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
         fromEvent(this.wrapperEl.nativeElement, 'mouseleave')
       )
         .pipe(
-          switchMap(() => interval(this.options.slideTime)
-            .pipe(
+          switchMap(() =>
+            interval(this.options.slideTime).pipe(
               takeUntil(fromEvent(this.wrapperEl.nativeElement, 'mouseenter'))
-            ))
+            )
+          )
         )
         .subscribe(() => {
           this.move(true);

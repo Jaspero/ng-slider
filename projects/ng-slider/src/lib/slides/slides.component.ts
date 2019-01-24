@@ -223,11 +223,13 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private _shouldEmitSlideInView(conditionValue) {
-    const currentIndex = Math.abs(this.left / this.slideWidthPercentage);
+  private _shouldEmitSlideInView(conditionValue, addBlocksPerView = true) {
+    const currentIndex =
+      Math.round(Math.abs(this.left / this.slideWidthPercentage)) +
+      (addBlocksPerView ? this.options.blocksPerView - 1 : 0);
 
+    const slides = this.slides.toArray();
     for (let i = 0; i < conditionValue; i++) {
-      const slides = this.slides.toArray();
       const checkIndex = currentIndex + i;
 
       if (slides[checkIndex] && !slides[checkIndex].viewed) {
@@ -303,7 +305,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.cdr.detectChanges();
 
-        this._shouldEmitSlideInView(this.options.blocksPerView);
+        this._shouldEmitSlideInView(this.options.blocksPerView, false);
 
         this.slider.change$.next({
           left: this.left,

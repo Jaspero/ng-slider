@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/Jaspero/ng-slider/compare/v1.4.9...v1.4.10) (2019-01-24)
+
+
+### Bug Fixes
+
+* slideInView emitting properly when blockPerView is different then 1 :bug: ([6daa32c](https://github.com/Jaspero/ng-slider/commit/6daa32c))
+
 ## [1.4.9](https://github.com/Jaspero/ng-slider/compare/v1.4.8...v1.4.9) (2019-01-16)
 
 

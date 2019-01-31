@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Jaspero/ng-slider/compare/v1.4.10...v1.5.0) (2019-01-31)
+
+
+### Features
+
+* **SlideArrow:** added arrowClicked event ([36daabe](https://github.com/Jaspero/ng-slider/commit/36daabe))
+
 ## [1.4.10](https://github.com/Jaspero/ng-slider/compare/v1.4.9...v1.4.10) (2019-01-24)
 
 

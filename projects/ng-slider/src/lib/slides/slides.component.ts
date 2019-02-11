@@ -132,6 +132,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   move(right = true, amount = 1) {
     this._resetTimer();
+    const loop = this.options.loop;
 
     if (right) {
       this.left -= this.slideWidthPercentage * amount;
@@ -140,9 +141,9 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.left < this.maxLeft) {
-      this.left = 0;
+      loop ? (this.left = 0) : (this.left = this.maxLeft);
     } else if (this.left > 0) {
-      this.left = this.maxLeft;
+      loop ? (this.left = this.maxLeft) : (this.left = 0);
     }
 
     this._shouldEmitSlideInView(amount);
@@ -297,10 +298,12 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._resetTimer();
 
+        const loop = this.options.loop;
+
         if (this.left < this.maxLeft) {
-          this.left = 0;
-        } else if (this.left > 1) {
-          this.left = this.maxLeft;
+          loop ? (this.left = 0) : (this.left = this.maxLeft);
+        } else if (this.left > 0) {
+          loop ? (this.left = this.maxLeft) : (this.left = 0);
         }
 
         this.cdr.detectChanges();

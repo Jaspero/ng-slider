@@ -25,7 +25,8 @@ export class SimpleExampleComponent {
   sliderOptions: Partial<SliderOptions> = {
     blocksPerView: 3,
     slideTime: 5000,
-    movesPerClick: 1
+    movesPerClick: 1,
+    loop: false
   };
 
   changeSize(size: number) {

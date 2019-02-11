@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Jaspero/ng-slider/compare/v1.5.0...v1.6.0) (2019-02-11)
+
+
+### Features
+
+* connected loop option ([a0c78aa](https://github.com/Jaspero/ng-slider/commit/a0c78aa))
+
 # [1.5.0](https://github.com/Jaspero/ng-slider/compare/v1.4.10...v1.5.0) (2019-01-31)
 
 

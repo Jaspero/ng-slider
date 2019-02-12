@@ -142,11 +142,12 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       this.left += this.slideWidthPercentage * amount;
       move = false;
     }
+
     const loop = this.options.loop;
     if (this.left < this.maxLeft) {
       loop ? (this.left = 0) : (this.left = this.maxLeft);
     } else if (this.left > 0) {
-      amount = 3;
+      amount = this.options.blocksPerView;
       loop ? (this.left = this.maxLeft) : (this.left = 0);
     }
     this._shouldEmitSlideInView(amount, move);

@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Jaspero/ng-slider/compare/v1.6.0...v1.6.1) (2019-02-12)
+
+
+### Bug Fixes
+
+* loop lazy load works ([8ee96f1](https://github.com/Jaspero/ng-slider/commit/8ee96f1))
+
 # [1.6.0](https://github.com/Jaspero/ng-slider/compare/v1.5.0...v1.6.0) (2019-02-11)
 
 

@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/Jaspero/ng-slider/compare/v1.6.2...v1.6.3) (2019-02-19)
+
+
+### Bug Fixes
+
+* **Slides:** change emitter not emitting proper index ([92d8939](https://github.com/Jaspero/ng-slider/commit/92d8939))
+
 ## [1.6.2](https://github.com/Jaspero/ng-slider/compare/v1.6.1...v1.6.2) (2019-02-12)
 
 

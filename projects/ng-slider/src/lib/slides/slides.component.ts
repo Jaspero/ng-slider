@@ -133,19 +133,24 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   move(right = true, amount = 1) {
     this._resetTimer();
 
+    let move: boolean;
+
     if (right) {
       this.left -= this.slideWidthPercentage * amount;
+      move = true;
     } else {
       this.left += this.slideWidthPercentage * amount;
+      move = false;
     }
 
+    const loop = this.options.loop;
     if (this.left < this.maxLeft) {
-      this.left = 0;
+      loop ? (this.left = 0) : (this.left = this.maxLeft);
     } else if (this.left > 0) {
-      this.left = this.maxLeft;
+      amount = this.options.blocksPerView;
+      loop ? (this.left = this.maxLeft) : (this.left = 0);
     }
-
-    this._shouldEmitSlideInView(amount);
+    this._shouldEmitSlideInView(amount, move);
 
     this.cdr.detectChanges();
 
@@ -158,6 +163,15 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this._emitSlideChange();
+  }
+
+  edgeCase() {
+    const loop = this.options.loop;
+    if (this.left < this.maxLeft) {
+      loop ? (this.left = 0) : (this.left = this.maxLeft);
+    } else if (this.left > 0) {
+      loop ? (this.left = this.maxLeft) : (this.left = 0);
+    }
   }
 
   private _setProps() {
@@ -228,11 +242,9 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     const currentIndex =
       Math.round(Math.abs(this.left / this.slideWidthPercentage)) +
       (addBlocksPerView ? this.options.blocksPerView - 1 : 0);
-
     const slides = this.slides.toArray();
     for (let i = 0; i < conditionValue; i++) {
       const checkIndex = currentIndex + i;
-
       if (slides[checkIndex] && !slides[checkIndex].viewed) {
         slides[checkIndex].viewed = true;
         this.slideInView.emit({
@@ -298,11 +310,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._resetTimer();
 
-        if (this.left < this.maxLeft) {
-          this.left = 0;
-        } else if (this.left > 1) {
-          this.left = this.maxLeft;
-        }
+        this.edgeCase();
 
         this.cdr.detectChanges();
 

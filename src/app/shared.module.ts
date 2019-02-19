@@ -1,13 +1,8 @@
 import {NgModule} from '@angular/core';
-import {JpSliderModule} from 'ng-slider';
+import {JpSliderModule} from '../../dist/@jaspero/ng-slider';
 
 @NgModule({
-  imports: [
-    JpSliderModule
-  ],
-  exports: [
-    JpSliderModule
-  ],
+  imports: [JpSliderModule],
+  exports: [JpSliderModule]
 })
-export class SharedModule {
-}
+export class SharedModule {}

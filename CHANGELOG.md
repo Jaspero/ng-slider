@@ -1,3 +1,31 @@
+## [1.6.2](https://github.com/Jaspero/ng-slider/compare/v1.6.1...v1.6.2) (2019-02-12)
+
+
+### Bug Fixes
+
+* lazy load ([0f3dc5a](https://github.com/Jaspero/ng-slider/commit/0f3dc5a))
+
+## [1.6.1](https://github.com/Jaspero/ng-slider/compare/v1.6.0...v1.6.1) (2019-02-12)
+
+
+### Bug Fixes
+
+* loop lazy load works ([8ee96f1](https://github.com/Jaspero/ng-slider/commit/8ee96f1))
+
+# [1.6.0](https://github.com/Jaspero/ng-slider/compare/v1.5.0...v1.6.0) (2019-02-11)
+
+
+### Features
+
+* connected loop option ([a0c78aa](https://github.com/Jaspero/ng-slider/commit/a0c78aa))
+
+# [1.5.0](https://github.com/Jaspero/ng-slider/compare/v1.4.10...v1.5.0) (2019-01-31)
+
+
+### Features
+
+* **SlideArrow:** added arrowClicked event ([36daabe](https://github.com/Jaspero/ng-slider/commit/36daabe))
+
 ## [1.4.10](https://github.com/Jaspero/ng-slider/compare/v1.4.9...v1.4.10) (2019-01-24)
 
 

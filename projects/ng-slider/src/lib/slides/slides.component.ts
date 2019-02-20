@@ -132,24 +132,45 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   move(right = true, amount = 1) {
     this._resetTimer();
+    let nextPosition;
 
     let move: boolean;
-
     if (right) {
-      this.left -= this.slideWidthPercentage * amount;
+      nextPosition = this.left - this.slideWidthPercentage * amount;
       move = true;
     } else {
-      this.left += this.slideWidthPercentage * amount;
+      nextPosition = this.left + this.slideWidthPercentage * amount;
       move = false;
     }
 
+    const gap = this.slideWidthPercentage * (amount - 1);
     const loop = this.options.loop;
-    if (this.left < this.maxLeft) {
-      loop ? (this.left = 0) : (this.left = this.maxLeft);
-    } else if (this.left > 0) {
-      amount = this.options.blocksPerView;
-      loop ? (this.left = this.maxLeft) : (this.left = 0);
+
+    switch (true) {
+      case nextPosition < this.maxLeft && nextPosition >= this.maxLeft - gap:
+      case nextPosition < this.maxLeft &&
+        !(nextPosition >= this.maxLeft - gap) &&
+        !loop:
+        this.left = this.maxLeft;
+        break;
+      case nextPosition < this.maxLeft &&
+        !(nextPosition >= this.maxLeft - gap) &&
+        loop:
+      case nextPosition > 0 && nextPosition <= gap:
+        this.left = 0;
+        break;
+      case nextPosition > 0 && !(nextPosition <= gap) && loop:
+        amount = this.options.blocksPerView;
+        this.left = this.maxLeft;
+        break;
+      case nextPosition > 0 && !(nextPosition <= gap) && !loop:
+        amount = this.options.blocksPerView;
+        this.left = 0;
+        break;
+      default:
+        this.left = nextPosition;
     }
+
     this._shouldEmitSlideInView(amount, move);
 
     this.cdr.detectChanges();

@@ -1,3 +1,10 @@
+## [1.6.5](https://github.com/Jaspero/ng-slider/compare/v1.6.4...v1.6.5) (2019-02-20)
+
+
+### Bug Fixes
+
+* keyboard arrows closes:[#11](https://github.com/Jaspero/ng-slider/issues/11) ([1748fbf](https://github.com/Jaspero/ng-slider/commit/1748fbf))
+
 ## [1.6.4](https://github.com/Jaspero/ng-slider/compare/v1.6.3...v1.6.4) (2019-02-20)
 
 

@@ -249,8 +249,9 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private _emitSlideChange() {
-    const leftAbs = Math.abs(this.left);
-    const index = leftAbs ? this.blockWidth / leftAbs - 1 : 0;
+    const index =
+      Math.round(Math.abs(this.left / this.slideWidthPercentage)) +
+      (this.options.blocksPerView - 1);
 
     this.change.next({
       slide: this.slides.toArray()[index],

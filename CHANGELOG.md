@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/Jaspero/ng-slider/compare/v1.6.3...v1.6.4) (2019-02-20)
+
+
+### Bug Fixes
+
+* moves per click count edge case [#12](https://github.com/Jaspero/ng-slider/issues/12) ([bb108e4](https://github.com/Jaspero/ng-slider/commit/bb108e4))
+
 ## [1.6.3](https://github.com/Jaspero/ng-slider/compare/v1.6.2...v1.6.3) (2019-02-19)
 
 

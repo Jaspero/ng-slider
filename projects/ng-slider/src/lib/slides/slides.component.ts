@@ -6,6 +6,7 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
+  HostListener,
   OnDestroy,
   OnInit,
   Output,
@@ -57,11 +58,36 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   lastPosition = 0;
   startPanX = 0;
   inPan = false;
+  mouseOver = false;
 
   timerReset$: BehaviorSubject<boolean>;
 
   private _manager: any;
   private _slideTimeInterval: Subscription;
+
+  @HostListener('mouseover')
+  onMouseOver() {
+    this.mouseOver = true;
+  }
+
+  @HostListener('mouseout')
+  onMouseOut() {
+    this.mouseOver = false;
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  keyDown(event: KeyboardEvent) {
+    if (this.mouseOver) {
+      switch (event.code) {
+        case 'ArrowLeft':
+          this.move(false, this.options.movesPerClick);
+          break;
+        case 'ArrowRight':
+          this.move(true, this.options.movesPerClick);
+          break;
+      }
+    }
+  }
 
   get transform() {
     return `translate3d(${this.left}%, 0px, 0px)`;

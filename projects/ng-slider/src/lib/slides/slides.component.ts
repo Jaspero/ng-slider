@@ -129,6 +129,8 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
         index: num,
         slide: this.slides.toArray()[num]
       });
+
+      this._shouldEmitSlideInView(this.options.blocksPerView, false);
     });
   }
 

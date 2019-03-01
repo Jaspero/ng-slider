@@ -1,3 +1,10 @@
+## [1.6.6](https://github.com/Jaspero/ng-slider/compare/v1.6.5...v1.6.6) (2019-03-01)
+
+
+### Bug Fixes
+
+* slideInView emitting with pagination closes:[#12](https://github.com/Jaspero/ng-slider/issues/12) ([95760ec](https://github.com/Jaspero/ng-slider/commit/95760ec))
+
 ## [1.6.5](https://github.com/Jaspero/ng-slider/compare/v1.6.4...v1.6.5) (2019-02-20)
 
 

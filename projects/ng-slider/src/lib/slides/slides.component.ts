@@ -111,6 +111,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.slider.jumpToPage$.subscribe(num => {
+      this.inPan = true;
       this.left = -this.slideWidthPercentage * num;
 
       this._resetTimer();
@@ -131,6 +132,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       this._shouldEmitSlideInView(this.options.blocksPerView, false);
+      this.inPan = false;
     });
   }
 
@@ -179,24 +181,29 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       case nextPosition < this.maxLeft &&
         !(nextPosition >= this.maxLeft - gap) &&
         !loop:
+        this.inPan = true;
         this.left = this.maxLeft;
         break;
       case nextPosition < this.maxLeft &&
         !(nextPosition >= this.maxLeft - gap) &&
         loop:
       case nextPosition > 0 && nextPosition <= gap:
+        this.inPan = true;
         this.left = 0;
         break;
       case nextPosition > 0 && !(nextPosition <= gap) && loop:
         amount = this.options.blocksPerView;
+        this.inPan = true;
         this.left = this.maxLeft;
         break;
       case nextPosition > 0 && !(nextPosition <= gap) && !loop:
         amount = this.options.blocksPerView;
+        this.inPan = true;
         this.left = 0;
         break;
       default:
         this.left = nextPosition;
+        this.inPan = false;
     }
 
     this._shouldEmitSlideInView(amount, move);
@@ -217,8 +224,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   edgeCase() {
     const loop = this.options.loop;
     if (this.left < this.maxLeft) {
+      this.inPan = true;
       loop ? (this.left = 0) : (this.left = this.maxLeft);
     } else if (this.left > 0) {
+      this.inPan = true;
       loop ? (this.left = this.maxLeft) : (this.left = 0);
     }
   }
@@ -346,7 +355,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
       mc.on('panend', event => {
         this.inPan = false;
-
         this.cdr.detectChanges();
 
         const shouldLockRight = this.startPanX - event.center.x > 0 ? 1 : 0;
@@ -362,6 +370,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.edgeCase();
 
         this.cdr.detectChanges();
+        this.inPan = false;
 
         this._shouldEmitSlideInView(this.options.blocksPerView, false);
 

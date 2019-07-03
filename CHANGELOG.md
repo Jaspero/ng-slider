@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/Jaspero/ng-slider/compare/v1.6.6...v2.0.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* replace offsetWidth with getBoundingClientRect().width ([d8a5c6a](https://github.com/Jaspero/ng-slider/commit/d8a5c6a))
+
+
+### Performance Improvements
+
+* bump package versions ([e886980](https://github.com/Jaspero/ng-slider/commit/e886980))
+
+
+### BREAKING CHANGES
+
+* Require Angular v8+
+
 ## [1.6.6](https://github.com/Jaspero/ng-slider/compare/v1.6.5...v1.6.6) (2019-03-01)
 
 

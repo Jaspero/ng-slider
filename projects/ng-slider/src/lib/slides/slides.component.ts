@@ -214,15 +214,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     this._emitSlideChange();
   }
 
-  edgeCase() {
-    const loop = this.options.loop;
-    if (this.left < this.maxLeft) {
-      loop ? (this.left = 0) : (this.left = this.maxLeft);
-    } else if (this.left > 0) {
-      loop ? (this.left = this.maxLeft) : (this.left = 0);
-    }
-  }
-
   private _setProps() {
     this.blockWidth = 100 / this.options.blocksPerView;
     this.contentWidth = this.blockWidth * this.slides.length;
@@ -231,8 +222,8 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.slideWidthPercentage =
       ((<HTMLElement>this.wrapperInnerEl.nativeElement.children[0])
-        .offsetWidth /
-        this.wrapperInnerEl.nativeElement.offsetWidth) *
+          .getBoundingClientRect().width /
+        this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
       100;
 
     this.maxLeft =
@@ -326,7 +317,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       mc.on('panmove', event => {
         const movedDifferencePx = event.center.x - this.lastPosition;
         const movedDifferencePercentage =
-          (movedDifferencePx / this.wrapperInnerEl.nativeElement.offsetWidth) *
+          (movedDifferencePx / this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
           100;
 
         this.left = this.left + movedDifferencePercentage;
@@ -359,7 +350,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._resetTimer();
 
-        this.edgeCase();
+        if (this.left < this.maxLeft) {
+          this.left = this.options.loop ? 0 : this.maxLeft;
+        } else if (this.left > 0) {
+          this.left = this.options.loop ? this.maxLeft : 0;
+        }
 
         this.cdr.detectChanges();
 

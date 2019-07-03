@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, TemplateRef, ViewChild} from '@angul
 })
 export class SlideComponent {
 
-  @ViewChild(TemplateRef)
+  @ViewChild(TemplateRef, {static: true})
   content: TemplateRef<any>;
 
   viewed = false;

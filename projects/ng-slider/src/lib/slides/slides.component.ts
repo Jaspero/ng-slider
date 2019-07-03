@@ -35,10 +35,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   @ContentChildren(SlideComponent)
   slides: QueryList<SlideComponent>;
 
-  @ViewChild('wrapper')
+  @ViewChild('wrapper', {static: true})
   wrapperEl: ElementRef<HTMLDivElement>;
 
-  @ViewChild('wrapperInner')
+  @ViewChild('wrapperInner', {static: true})
   wrapperInnerEl: ElementRef<HTMLDivElement>;
 
   @Output()

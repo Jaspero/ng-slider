@@ -67,6 +67,8 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _manager: any;
   private _slideTimeInterval: Subscription;
+  private _mouseEnterSubscription: Subscription;
+  private _mouseLeaveSubscription: Subscription;
 
   @HostListener('mouseover')
   onMouseOver() {
@@ -142,9 +144,15 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       this._manager.destroy();
     }
 
-    if (this._slideTimeInterval) {
-      this._slideTimeInterval.unsubscribe();
-    }
+    [
+      this._slideTimeInterval,
+      this._mouseEnterSubscription,
+      this._mouseLeaveSubscription
+    ]
+      .filter(subscription => subscription)
+      .forEach(subscription => {
+        subscription.unsubscribe();
+      });
   }
 
   ngAfterViewInit() {
@@ -389,8 +397,8 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       /**
        * Detect if mouse is inside/outside of page
        */
-      fromEvent(this.document, 'mouseenter').subscribe(() => this.blockAutoSlide = false);
-      fromEvent(this.document, 'mouseleave').subscribe(() => this.blockAutoSlide = true);
+      this._mouseEnterSubscription = fromEvent(this.document, 'mouseenter').subscribe(() => this.blockAutoSlide = false);
+      this._mouseLeaveSubscription = fromEvent(this.document, 'mouseleave').subscribe(() => this.blockAutoSlide = true);
 
       this._slideTimeInterval = merge(
         this.timerReset$,

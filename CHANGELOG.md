@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/Jaspero/ng-slider/compare/v2.1.0...v2.1.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* subscription cleanup ([42890e4](https://github.com/Jaspero/ng-slider/commit/42890e4))
+
 # [2.1.0](https://github.com/Jaspero/ng-slider/compare/v2.0.0...v2.1.0) (2019-07-10)
 
 

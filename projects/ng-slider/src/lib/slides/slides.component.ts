@@ -7,6 +7,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
   OnDestroy,
   OnInit,
   Output,
@@ -14,11 +15,12 @@ import {
   ViewChild
 } from '@angular/core';
 import {BehaviorSubject, fromEvent, interval, merge, Subscription} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import {filter, switchMap, takeUntil} from 'rxjs/operators';
 import {SlideChange} from '../interfaces/slide-change.interface';
 import {SliderOptions} from '../interfaces/slider-options.interface';
 import {SlideComponent} from '../slide/slide.component';
 import {SliderComponent} from '../slider/slider.component';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'jp-slides',
@@ -29,7 +31,8 @@ import {SliderComponent} from '../slider/slider.component';
 export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private slider: SliderComponent,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private document: any
   ) {}
 
   @ContentChildren(SlideComponent)
@@ -54,11 +57,11 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   slideWidthPercentage: number;
   maxLeft: number;
   left = 0;
-
   lastPosition = 0;
   startPanX = 0;
   inPan = false;
   mouseOver = false;
+  blockAutoSlide = false;
 
   timerReset$: BehaviorSubject<boolean>;
 
@@ -383,6 +386,12 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.timerReset$ = new BehaviorSubject(true);
 
+      /**
+       * Detect if mouse is inside/outside of page
+       */
+      fromEvent(this.document, 'mouseenter').subscribe(() => this.blockAutoSlide = false);
+      fromEvent(this.document, 'mouseleave').subscribe(() => this.blockAutoSlide = true);
+
       this._slideTimeInterval = merge(
         this.timerReset$,
         fromEvent(this.wrapperEl.nativeElement, 'mouseleave')
@@ -392,7 +401,12 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
             interval(this.options.slideTime).pipe(
               takeUntil(fromEvent(this.wrapperEl.nativeElement, 'mouseenter'))
             )
-          )
+          ),
+
+          /**
+           * Auto slide is blocked if mouse is outside of page
+           */
+          filter(() => !this.blockAutoSlide)
         )
         .subscribe(() => {
           this.move(true);

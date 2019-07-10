@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/Jaspero/ng-slider/compare/v2.0.0...v2.1.0) (2019-07-10)
+
+
+### Features
+
+* block auto slide if mouse is outside of document ([ee21bd8](https://github.com/Jaspero/ng-slider/commit/ee21bd8))
+
 # [2.0.0](https://github.com/Jaspero/ng-slider/compare/v1.6.6...v2.0.0) (2019-07-03)
 
 

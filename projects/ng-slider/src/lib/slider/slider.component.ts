@@ -16,7 +16,7 @@ export class SliderComponent {
   ) {}
 
   move$ = new Subject<SlideArrowDirection>();
-  jumpToPage$ = new Subject<number>();
+  jumpToSlide$ = new Subject<number>();
   finalOptions$ = new BehaviorSubject<SliderOptions>(this.defaultOptions);
   change$ = new Subject<{
     slideWidthPercentage: number,

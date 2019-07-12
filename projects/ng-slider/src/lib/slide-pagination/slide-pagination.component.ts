@@ -44,7 +44,7 @@ export class SlidePaginationComponent implements OnInit {
 
   pagMove(i) {
     this.active = i;
-    this._slider.jumpToPage$.next(i);
+    this._slider.jumpToSlide$.next(i);
     this._cdr.detectChanges();
   }
 }

@@ -115,7 +115,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       this.move(direction === 'right', this.options.movesPerClick);
     });
 
-    this.slider.jumpToPage$.subscribe(num => {
+    this.slider.jumpToSlide$.subscribe(num => {
       this.left = -this.slideWidthPercentage * num;
 
       this._resetTimer();

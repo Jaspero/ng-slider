@@ -250,8 +250,13 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     const slides = this.slides.toArray();
 
     if (initialSlide) {
+      this.blockSlideAnimation = true;
       this.left = -this.slideWidthPercentage * initialSlide;
       this.cdr.detectChanges();
+      setTimeout(() => {
+        this.blockSlideAnimation = false;
+        // todo: follow up dynamic value when it's implemented #4
+      }, 500);
     } else {
       this.left = 0;
     }

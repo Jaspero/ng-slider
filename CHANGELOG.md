@@ -1,3 +1,11 @@
+# [2.2.0](https://github.com/Jaspero/ng-slider/compare/v2.1.1...v2.2.0) (2019-07-12)
+
+
+### Features
+
+* Jump to initial slide without animation closes [#17](https://github.com/Jaspero/ng-slider/issues/17) ([7a715e9](https://github.com/Jaspero/ng-slider/commit/7a715e9))
+* Transition duration on last slide closes [#15](https://github.com/Jaspero/ng-slider/issues/15) ([de66c43](https://github.com/Jaspero/ng-slider/commit/de66c43))
+
 ## [2.1.1](https://github.com/Jaspero/ng-slider/compare/v2.1.0...v2.1.1) (2019-07-10)
 
 

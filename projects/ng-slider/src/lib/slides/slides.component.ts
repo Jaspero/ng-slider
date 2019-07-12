@@ -62,6 +62,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   inPan = false;
   mouseOver = false;
   blockAutoSlide = false;
+  blockSlideAnimation = false;
 
   timerReset$: BehaviorSubject<boolean>;
 
@@ -116,6 +117,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.slider.jumpToSlide$.subscribe(num => {
+      this.inPan = true;
       this.left = -this.slideWidthPercentage * num;
 
       this._resetTimer();
@@ -129,6 +131,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
         slides: this.slides,
         slideWidthPercentage: this.slideWidthPercentage
       });
+      this.inPan = false;
 
       this.change.next({
         index: num,
@@ -185,6 +188,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     const gap = this.slideWidthPercentage * (amount - 1);
     const loop = this.options.loop;
 
+    this.inPan = true;
     switch (true) {
       case nextPosition < this.maxLeft && nextPosition >= this.maxLeft - gap:
       case nextPosition < this.maxLeft &&
@@ -208,6 +212,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       default:
         this.left = nextPosition;
+        this.inPan = false;
     }
 
     this._shouldEmitSlideInView(amount, move);

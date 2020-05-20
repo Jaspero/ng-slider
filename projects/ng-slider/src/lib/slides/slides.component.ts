@@ -236,11 +236,13 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.cdr.detectChanges();
 
-    this.slideWidthPercentage =
-      ((<HTMLElement>this.wrapperInnerEl.nativeElement.children[0])
-          .getBoundingClientRect().width /
-        this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
-      100;
+    setTimeout(() => {
+      this.slideWidthPercentage =
+        ((<HTMLElement>this.wrapperInnerEl.nativeElement.children[0])
+            .getBoundingClientRect().width /
+          this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
+        100;
+    });
 
     this.maxLeft =
       -this.slideWidthPercentage *

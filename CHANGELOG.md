@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/Jaspero/ng-slider/compare/v2.2.1...v2.2.2) (2020-05-21)
+
+
+### Bug Fixes
+
+* revert get new wrapperInnerEl width on slides changes ([7c24cd6](https://github.com/Jaspero/ng-slider/commit/7c24cd6))
+
 ## [2.2.1](https://github.com/Jaspero/ng-slider/compare/v2.2.0...v2.2.1) (2020-05-20)
 
 

@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/Jaspero/ng-slider/compare/v2.2.2...v2.3.0) (2020-12-14)
+
+
+### Features
+
+* transition between last and first slide ([a90aaf3](https://github.com/Jaspero/ng-slider/commit/a90aaf3215319133358b43596d44ca7b737147b2))
+
 ## [2.2.2](https://github.com/Jaspero/ng-slider/compare/v2.2.1...v2.2.2) (2020-05-21)
 
 

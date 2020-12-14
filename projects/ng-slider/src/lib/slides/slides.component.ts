@@ -1,3 +1,4 @@
+import {DOCUMENT} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -20,7 +21,6 @@ import {SlideChange} from '../interfaces/slide-change.interface';
 import {SliderOptions} from '../interfaces/slider-options.interface';
 import {SlideComponent} from '../slide/slide.component';
 import {SliderComponent} from '../slider/slider.component';
-import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'jp-slides',
@@ -71,6 +71,10 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
   private _mouseEnterSubscription: Subscription;
   private _mouseLeaveSubscription: Subscription;
 
+  get transform() {
+    return `translate3d(${this.left}%, 0px, 0px)`;
+  }
+
   @HostListener('mouseover')
   onMouseOver() {
     this.mouseOver = true;
@@ -93,10 +97,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
           break;
       }
     }
-  }
-
-  get transform() {
-    return `translate3d(${this.left}%, 0px, 0px)`;
   }
 
   ngOnInit() {

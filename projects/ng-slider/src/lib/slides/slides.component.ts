@@ -188,7 +188,8 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     const gap = this.slideWidthPercentage * (amount - 1);
     const loop = this.options.loop;
 
-    this.inPan = true;
+    this.inPan = !this.options.firstToLastTransition;
+
     switch (true) {
       case nextPosition < this.maxLeft && nextPosition >= this.maxLeft - gap:
       case nextPosition < this.maxLeft &&
@@ -237,8 +238,9 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
 
     this.slideWidthPercentage =
-      ((<HTMLElement>this.wrapperInnerEl.nativeElement.children[0])
-          .getBoundingClientRect().width /
+      ((<HTMLElement>(
+        this.wrapperInnerEl.nativeElement.children[0]
+      )).getBoundingClientRect().width /
         this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
       100;
 
@@ -338,7 +340,8 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       mc.on('panmove', event => {
         const movedDifferencePx = event.center.x - this.lastPosition;
         const movedDifferencePercentage =
-          (movedDifferencePx / this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
+          (movedDifferencePx /
+            this.wrapperInnerEl.nativeElement.getBoundingClientRect().width) *
           100;
 
         this.left = this.left + movedDifferencePercentage;
@@ -407,8 +410,14 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       /**
        * Detect if mouse is inside/outside of page
        */
-      this._mouseEnterSubscription = fromEvent(this.document, 'mouseenter').subscribe(() => this.blockAutoSlide = false);
-      this._mouseLeaveSubscription = fromEvent(this.document, 'mouseleave').subscribe(() => this.blockAutoSlide = true);
+      this._mouseEnterSubscription = fromEvent(
+        this.document,
+        'mouseenter'
+      ).subscribe(() => (this.blockAutoSlide = false));
+      this._mouseLeaveSubscription = fromEvent(
+        this.document,
+        'mouseleave'
+      ).subscribe(() => (this.blockAutoSlide = true));
 
       this._slideTimeInterval = merge(
         this.timerReset$,

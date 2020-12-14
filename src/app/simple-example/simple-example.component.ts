@@ -26,7 +26,8 @@ export class SimpleExampleComponent {
     blocksPerView: 3,
     slideTime: 5000,
     movesPerClick: 2,
-    loop: true
+    loop: true,
+    firstToLastTransition: true
   };
 
   changeSize(size: number) {

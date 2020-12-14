@@ -5,5 +5,6 @@ export const DEFAULT_OPTIONS: SliderOptions = {
   slideTime: 0,
   movesPerClick: 1,
   initialSlide: 0,
-  loop: true
+  loop: true,
+  firstToLastTransition: false
 };

@@ -68,13 +68,14 @@ You can provide default global options when importing the slider module `JpSlide
 or on the `jp-slider` component `<jp-slider [options]="options">`. Options provided through the component
 input are merged with default options with component options overriding the default ones.
 
-| name          | type    | default | description                                                                                  |
-| ------------- | ------- | ------- | -------------------------------------------------------------------------------------------- |
-| blocksPerView | number  | 1       | how many slides should be shown per view                                                     |
-| slideTime     | number  | 0       | on what interval should the slider auto slide (disabled if 0)                                |
-| movesPerClick | number  | 1       | how many slides should be moved per click on the jpSlideArrow directive                      |
-| initialSlide  | number  | 0       | index of the first slide that should be in view when the component inits                     |
-| loop          | boolean | true    | should the slider loop (clicking on the last slide takes you to the first one and vice versa |
+| name                  | type    | default | description                                                                                  |
+| --------------------- | ------- | ------- | -------------------------------------------------------------------------------------------- |
+| blocksPerView         | number  | 1       | how many slides should be shown per view                                                     |
+| slideTime             | number  | 0       | on what interval should the slider auto slide (disabled if 0)                                |
+| movesPerClick         | number  | 1       | how many slides should be moved per click on the jpSlideArrow directive                      |
+| initialSlide          | number  | 0       | index of the first slide that should be in view when the component inits                     |
+| loop                  | boolean | true    | should the slider loop (clicking on the last slide takes you to the first one and vice versa |
+| firstToLastTransition | boolean | false   | animate transition between first and last slide (performance intensive)                      |
 
 ### Events
 

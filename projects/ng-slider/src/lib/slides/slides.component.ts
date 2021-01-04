@@ -233,7 +233,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _setProps() {
     this.blockWidth = 100 / this.options.blocksPerView;
-    this.contentWidth = this.blockWidth * this.slides.length;
+    this.contentWidth = Math.max(this.blockWidth * this.slides.length, 100);
 
     this.cdr.detectChanges();
 

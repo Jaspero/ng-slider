@@ -429,7 +429,6 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
               takeUntil(fromEvent(this.wrapperEl.nativeElement, 'mouseenter'))
             )
           ),
-
           /**
            * Auto slide is blocked if mouse is outside of page
            */

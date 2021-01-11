@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/Jaspero/ng-slider/compare/v2.3.1...v2.3.2) (2021-01-11)
+
+
+### Bug Fixes
+
+* missing semantic dependency @semantic-release/npm ([692ba98](https://github.com/Jaspero/ng-slider/commit/692ba985ef41aa3f3e0e8411fbec01b005d4260d))
+
 # [2.3.0](https://github.com/Jaspero/ng-slider/compare/v2.2.2...v2.3.0) (2021-01-11)
 
 

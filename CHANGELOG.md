@@ -1,3 +1,15 @@
+# [2.3.0](https://github.com/Jaspero/ng-slider/compare/v2.2.2...v2.3.0) (2021-01-11)
+
+
+### Bug Fixes
+
+* slider options are optional && contentWidth is min 100% ([1a36ec3](https://github.com/Jaspero/ng-slider/commit/1a36ec3e628642d1f9ec42b15d94e1b3f4510d86))
+
+
+### Features
+
+* transition between last and first slide ([a90aaf3](https://github.com/Jaspero/ng-slider/commit/a90aaf3215319133358b43596d44ca7b737147b2))
+
 # [2.3.0](https://github.com/Jaspero/ng-slider/compare/v2.2.2...v2.3.0) (2021-01-04)
 
 

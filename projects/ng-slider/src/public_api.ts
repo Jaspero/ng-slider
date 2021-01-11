@@ -1,7 +1,6 @@
 /*
  * Public API Surface of ng-slider
  */
-
 export * from './lib/slider.module';
 export * from './lib/slider/slider.component';
 export * from './lib/slide/slide.component';

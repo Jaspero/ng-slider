@@ -153,9 +153,7 @@ export class SlidesComponent implements OnInit, AfterViewInit, OnDestroy {
       this._mouseLeaveSubscription
     ]
       .filter(subscription => subscription)
-      .forEach(subscription => {
-        subscription.unsubscribe();
-      });
+      .forEach(subscription => subscription.unsubscribe());
   }
 
   ngAfterViewInit() {

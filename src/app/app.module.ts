@@ -6,19 +6,20 @@ import 'hammerjs';
 import {AppComponent} from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       {
         path: 'simple-example',
-        loadChildren: './simple-example/simple-example.module#SimpleExampleModule'
+        loadChildren: () =>
+          import('./simple-example/simple-example.module').then(
+            m => m.SimpleExampleModule
+          )
       }
     ])
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

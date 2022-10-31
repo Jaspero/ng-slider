@@ -25,12 +25,8 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [
-    ...COMPONENTS
-  ],
-  imports: [
-    CommonModule
-  ],
+  declarations: [...COMPONENTS],
+  imports: [CommonModule],
   providers: [
     {
       provide: 'options',
@@ -40,7 +36,9 @@ const COMPONENTS = [
   exports: COMPONENTS
 })
 export class JpSliderModule {
-  static defaultOptions(options: Partial<SliderOptions> = {}): ModuleWithProviders {
+  static defaultOptions(
+    options: Partial<SliderOptions> = {}
+  ): ModuleWithProviders<JpSliderModule> {
     return {
       ngModule: JpSliderModule,
       providers: [

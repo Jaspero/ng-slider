@@ -20,6 +20,9 @@
     "@angular/core": "^8.1.0",
     "hammerjs": "^2.0.8"
   },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Jaspero/ng-slider.git"

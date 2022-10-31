@@ -9,7 +9,7 @@
     "Slider",
     "Range slider"
   ],
-  "version": "2.3.1",
+  "version": "2.3.3",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jaspero/ng-slider/issues"

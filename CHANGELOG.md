@@ -1,3 +1,11 @@
+## [2.3.3](https://github.com/Jaspero/ng-slider/compare/v2.3.2...v2.3.3) (2022-10-31)
+
+
+### Bug Fixes
+
+* trigger and update version to npm ([083b10a](https://github.com/Jaspero/ng-slider/commit/083b10a05ca1d2285e7b2cc9df5cf2e05780ad75))
+* trigger and update version to npm ([bd1415a](https://github.com/Jaspero/ng-slider/commit/bd1415a58dda895f4f69010e4983497e77b5ba01))
+
 ## [2.3.2](https://github.com/Jaspero/ng-slider/compare/v2.3.1...v2.3.2) (2021-01-11)
 
 

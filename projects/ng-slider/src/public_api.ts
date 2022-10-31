@@ -4,6 +4,7 @@
 export * from './lib/slider.module';
 export * from './lib/slider/slider.component';
 export * from './lib/slide/slide.component';
+export * from './lib/slides/slides.component';
 export * from './lib/slide-arrow/slide-arrow.directive';
 export * from './lib/slide-pagination/slide-pagination.component';
 export * from './lib/interfaces/slider-options.interface';

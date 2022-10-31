@@ -10,7 +10,7 @@
       "prefix": "jp",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss",
+          "style": "scss",
           "changeDetection": "OnPush"
         }
       },
@@ -23,14 +23,15 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -42,10 +43,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -54,10 +52,15 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -83,26 +86,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "assets": ["src/favicon.ico", "src/assets"]
           }
         }
       }
@@ -114,7 +100,7 @@
       "prefix": "jp",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss",
+          "style": "scss",
           "changeDetection": "OnPush"
         }
       },
@@ -127,7 +113,8 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/ng-slider/ng-package.prod.json"
+              "project": "projects/ng-slider/ng-package.prod.json",
+              "tsConfig": "projects/ng-slider/tsconfig.lib.prod.json"
             }
           }
         },
@@ -138,21 +125,8 @@
             "tsConfig": "projects/ng-slider/tsconfig.spec.json",
             "karmaConfig": "projects/ng-slider/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ng-slider/tsconfig.lib.json",
-              "projects/ng-slider/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
-  },
-  "defaultProject": "ng-slider"
+  }
 }

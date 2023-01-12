@@ -9,12 +9,22 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2020",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"],
+    "target": "ES2022",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "paths": {
-      "ng-slider": ["dist/@jaspero/ng-slider"],
-      "ng-slider/*": ["dist/@jaspero/ng-slider/*"]
-    }
+      "ng-slider": [
+        "dist/@jaspero/ng-slider"
+      ],
+      "ng-slider/*": [
+        "dist/@jaspero/ng-slider/*"
+      ]
+    },
+    "useDefineForClassFields": false
   }
 }

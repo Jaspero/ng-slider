@@ -1,3 +1,11 @@
+# [2.4.0](https://github.com/Jaspero/ng-slider/compare/v2.3.4...v2.4.0) (2023-01-12)
+
+
+### Features
+
+* update to angular v15 ([1cff5ac](https://github.com/Jaspero/ng-slider/commit/1cff5ac2eaa8c718fd70813e98dbb4daf43d3d43))
+* updating to angular v15 ([bf1b04c](https://github.com/Jaspero/ng-slider/commit/bf1b04c8367a26205a6137cbbf3ac503c473bced))
+
 ## [2.3.4](https://github.com/Jaspero/ng-slider/compare/v2.3.3...v2.3.4) (2022-11-01)
 
 

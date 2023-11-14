@@ -24,15 +24,15 @@
     ]
   },
   "dependencies": {
-    "@angular/animations": "16.0.0",
-    "@angular/common": "16.0.0",
-    "@angular/compiler": "16.0.0",
-    "@angular/core": "16.0.0",
-    "@angular/forms": "16.0.0",
+    "@angular/animations": "17.0.0",
+    "@angular/common": "17.0.0",
+    "@angular/compiler": "17.0.0",
+    "@angular/core": "17.0.0",
+    "@angular/forms": "17.0.0",
     "@angular/http": "7.2.15",
-    "@angular/platform-browser": "16.0.0",
-    "@angular/platform-browser-dynamic": "16.0.0",
-    "@angular/router": "16.0.0",
+    "@angular/platform-browser": "17.0.0",
+    "@angular/platform-browser-dynamic": "17.0.0",
+    "@angular/router": "17.0.0",
     "@jaspero/ng-slider": "2.3.2",
     "core-js": "3.26.0",
     "hammerjs": "2.0.8",
@@ -43,9 +43,9 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "16.2.5",
     "@angular-devkit/build-ng-packagr": "0.1002.4",
-    "@angular/cli": "16.0.0",
-    "@angular/compiler-cli": "16.0.0",
-    "@angular/language-service": "16.0.0",
+    "@angular/cli": "17.0.0",
+    "@angular/compiler-cli": "17.0.0",
+    "@angular/language-service": "17.0.0",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/npm": "9.0.1",
@@ -68,7 +68,7 @@
     "semantic-release": "19.0.5",
     "ts-node": "10.9.1",
     "tslint": "6.1.3",
-    "typescript": "5.0.4"
+    "typescript": "5.2.2"
   },
   "repository": {
     "type": "git",

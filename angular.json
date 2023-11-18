@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-slider-example:build"
+            "buildTarget": "ng-slider-example:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-slider-example:build:production"
+              "buildTarget": "ng-slider-example:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-slider-example:build"
+            "buildTarget": "ng-slider-example:build"
           }
         },
         "test": {

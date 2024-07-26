@@ -9,15 +9,15 @@
     "Slider",
     "Range slider"
   ],
-  "version": "2.3.3",
+  "version": "3.3.3",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jaspero/ng-slider/issues"
   },
   "homepage": "https://jaspero.co",
   "peerDependencies": {
-    "@angular/common": "^18.1.2",
-    "@angular/core": "^18.1.2",
+    "@angular/common": "18.1.2",
+    "@angular/core": "18.1.2",
     "hammerjs": "^2.0.8"
   },
   "dependencies": {

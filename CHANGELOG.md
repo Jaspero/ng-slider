@@ -1,3 +1,13 @@
+# [2.7.0](https://github.com/Jaspero/ng-slider/compare/v2.6.0...v2.7.0) (2024-07-26)
+
+
+### Features
+
+* bump angular version v18 ([df06ac0](https://github.com/Jaspero/ng-slider/commit/df06ac0df3f8eb2f0d975aa76f4fc1b11adfcbf1))
+* bump angular version v18 ([75e486a](https://github.com/Jaspero/ng-slider/commit/75e486aa2c53650cdb306956c1e4522089639645))
+* bump angular version v18 ([475b548](https://github.com/Jaspero/ng-slider/commit/475b548cddb93ad42d83226cf80cdf6bbce98375))
+* bump angular version v18 BREAKING CHANGES ([7d41cac](https://github.com/Jaspero/ng-slider/commit/7d41cacdfcba001440b148f10e81050467b895fa))
+
 # [2.6.0](https://github.com/Jaspero/ng-slider/compare/v2.5.0...v2.6.0) (2023-11-14)
 
 
